@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AR Furniture App</title>
+
+  <!-- AR.js + Three.js -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+    button {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      padding: 10px 15px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- AR Scene -->
+<a-scene embedded arjs>
+  
+  <!-- Camera -->
+  <a-camera position="0 0 0"></a-camera>
+
+  <!-- Marker (detects surface) -->
+  <a-marker preset="hiro">
+    
+    <!-- Furniture (box for now) -->
+    <a-box 
+      id="furniture"
+      position="0 0.5 0"
+      color="brown"
+      depth="1"
+      height="0.5"
+      width="1">
+    </a-box>
+
+  </a-marker>
+
+</a-scene>
+
+<button onclick="rotate()">Rotate</button>
+
+<script>
+  function rotate() {
+    let obj = document.querySelector("#furniture");
+    let rotation = obj.getAttribute("rotation");
+    obj.setAttribute("rotation", {
+      x: rotation.x,
+      y: rotation.y + 45,
+      z: rotation.z
+    });
+  }
+</script>
+
+</body>
+</html>
